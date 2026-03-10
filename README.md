@@ -33,7 +33,7 @@ User Input
 🚀 快速开始 (Quick Start)
 1. 克隆仓库
 
-git clone https://github.com/<你的GitHub用户名>/EvoKernel-Agent.git
+git clone https://github.com/workshopzero/EvoKernel-Agent
 cd EvoKernel-Agent
 
 2. 安装依赖
