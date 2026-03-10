@@ -1,0 +1,89 @@
+{
+  "active_language": "zh_CN",
+  "templates": {
+    "zh_CN": {
+      "watchdog": {
+        "starting": "[守护进程] 正在启动主系统 (main.py)...",
+        "exited": "[守护进程] 系统正常退出。",
+        "restart_req": "[守护进程] 系统请求重启 (已应用自我修改)，2秒后执行...",
+        "crashed": "[守护进程] 系统崩溃，退出码 {code}。(连续崩溃 {count} 次)",
+        "too_many_crashes": "[守护进程] 连续崩溃次数过多，暂停 60 秒...",
+        "analyzing": "[守护进程] 正在分析内核完整性...",
+        "syntax_ok": "[守护进程] 内核语法检查通过。准备重启...",
+        "corrupted": "[守护进程] 内核已损坏！启动回滚程序...",
+        "rollback_ok": "[守护进程] 回滚成功。准备重启...",
+        "fatal_error": "[守护进程] 致命错误：系统无法恢复，请手动检查代码。",
+        "no_backups": "[守护进程] 未找到备份文件！无法修复。",
+        "rolling_back": "[守护进程] 正在回滚至 {file}...",
+        "restore_fail": "[守护进程] 回滚失败: {error}",
+        "stopping": "\n[守护进程] 接收到用户指令，正在停止运行。"
+      },
+      "ui": {
+        "init_core": "[核心] 认知内核已就绪 | 决策权: Python 主循环",
+        "init_config": "[状态] 模型: {model} | 温度: {temp}",
+        "init_vertex_fail": "[错误] Vertex AI 连接失败: {e}",
+        "init_local_conn": "[核心] 已连接本地模型: {model}",
+        "init_local_fail": "[警告] 本地模型连接失败",
+        "thinking_distill": "[思考] 正在提取特征...",
+        "sys1_exec": "[直觉] 正在执行技能：{desc}",
+        "sys1_fail": "[直觉] 执行失败，转入逻辑推理...",
+        "sys2_evolve": "[逻辑] 遇到新情况，正在进化工具...",
+        "evo_start": "[进化] 正在生成代码解决：{task}",
+        "stm_compress": "[记忆] 工作记忆达到阈值，正在执行潜意识压缩...",
+        "knowledge_saved": "[记忆] 已将新知识写入长期皮层：{concept}",
+        "knowledge_recall": "[检索] 唤起相关记忆：{concept}",
+        "self_mod_start": "[高危] 正在启动自我修改程序..."
+      },
+      "router": "你是一个自然语言意图解析器。\n任务：根据用户的输入，判断其核心意图。\n可选意图分类：\n1. \"chat\" (日常闲聊、情感交流)\n2. \"memorize\" (用户告诉你一个新知识、事实、设定、密码或规则，要求你记住)\n3. \"query\" (用户询问某个客观知识、概念或你们之前聊过的事实)\n4. \"execute\" (用户要求编写代码、执行具体任务、计算、操作电脑等)\n\n上下文记忆：\n{context}\n\n用户输入：{input}\n\n输出要求：必须且只能输出严格的JSON格式！例如：\n{\"intent\": \"分类名\", \"parameters\": {\"keywords\": \"提取的关键信息\"}}\n绝对不要输出任何多余的文字。",
+      "compressor": "你是一个记忆压缩器。请将以下对话总结为一段简短的陈述（不超过100字），保留最核心的事实和当前对话的情境状态。直接输出总结，不要废话。\n对话记录：\n{history}",
+      "extractor": "提取以下文本中的核心知识点或事实。\n要求输出JSON格式：{\"concept\": \"核心概念名(短语)\", \"description\": \"详细描述/事实细节\"}\n文本：{input}",
+      "evolution": "你是进化引擎。\n任务：编写Python脚本解决用户问题。\n权限：无限制联网、文件读写。\n输出格式：仅输出 Python 代码块 (```python ... ```)。",
+      "modifier": "你正在修改系统内核。\n指令：{instruction}\n规则：保留 NeuralCore 类结构。返回完整代码。\n源码长度：{code_len}",
+      "curiosity": "你是好奇心引擎。\n目标：构思一个【全新的】任务。\n现有技能：{skills}\n输出：仅输出任务描述字符串。",
+      "distiller": "你是语义蒸馏器。\n任务：将用户的输入转化为标准的意图字符串。\n要求：仅输出意图字符串。",
+      "language_instruction": "\n(请使用中文处理指令和回复)"
+    },
+    "en_US": {
+      "watchdog": {
+        "starting": "[Watchdog] Starting Main System (main.py)...",
+        "exited": "[Watchdog] System exited normally.",
+        "restart_req": "[Watchdog] System requested RESTART (Self-Mod Applied). Rebooting in 2s...",
+        "crashed": "[Watchdog] System CRASHED with code {code}. (Crash #{count})",
+        "too_many_crashes": "[Watchdog] Too many crashes. Pausing for 60s...",
+        "analyzing": "[Watchdog] Analyzing core integrity...",
+        "syntax_ok": "[Watchdog] Kernel syntax OK. Restarting...",
+        "corrupted": "[Watchdog] Kernel CORRUPTED! Initiating Rollback...",
+        "rollback_ok": "[Watchdog] Rollback successful. Restarting...",
+        "fatal_error": "[Watchdog] FATAL ERROR: System Dead. Check code manually.",
+        "no_backups": "[Watchdog] No backups found! Cannot repair.",
+        "rolling_back": "[Watchdog] Rolling back to {file}...",
+        "restore_fail": "[Watchdog] Restore failed: {error}",
+        "stopping": "\n[Watchdog] Stopping by user request."
+      },
+      "ui": {
+        "init_core": "[Core] Cognitive Kernel Ready | Decision: Python Loop",
+        "init_config": "[State] Model: {model} | Temp: {temp}",
+        "init_vertex_fail": "[Error] Vertex AI Init Failed: {e}",
+        "init_local_conn": "[Core] Connected to Local Model: {model}",
+        "init_local_fail": "[Warn] Local Model disconnected",
+        "thinking_distill": "[Thinking] Extracting features...",
+        "sys1_exec": "[System 1] Executing Skill: {desc}",
+        "sys1_fail": "[System 1] Failed, retrying with System 2...",
+        "sys2_evolve": "[System 2] Evolving new tools...",
+        "evo_start": "[Evo] Generating code for: {task}",
+        "stm_compress": "[Memory] STM full, executing subconscious compression...",
+        "knowledge_saved": "[Memory] Written to long-term cortex: {concept}",
+        "knowledge_recall": "[Recall] Retrieved memory: {concept}",
+        "self_mod_start": "[CRITICAL] INITIATING SELF-MODIFICATION..."
+      },
+      "router": "You are a natural language intent parser.\nTask: Determine the core intent of the user's input.\nCategories:\n1. \"chat\" (general conversation, emotions)\n2. \"memorize\" (user provides a new fact, rule, password, or setting to remember)\n3. \"query\" (user asks about a fact, concept, or past memory)\n4. \"execute\" (user asks to write code, perform a task, calculate, etc.)\n\nContext:\n{context}\n\nUser Input: {input}\n\nOutput ONLY strict JSON format. Example:\n{\"intent\": \"category_name\", \"parameters\": {\"keywords\": \"extracted keywords\"}}\nDo not output any other text.",
+      "compressor": "You are a memory compressor. Summarize the following dialogue into a brief statement (under 50 words), keeping core facts and context. Output only the summary.\nDialogue:\n{history}",
+      "extractor": "Extract core facts from the text.\nOutput strict JSON: {\"concept\": \"core concept name\", \"description\": \"detailed fact\"}\nText: {input}",
+      "evolution": "You are the Evolution Engine. Task: Write a Python script. Output ONLY a python code block.",
+      "modifier": "You are modifying kernel.py. Instruction: {instruction}. Return FULL code.",
+      "curiosity": "You are the Curiosity Engine. Propose a NEW task. Existing skills: {skills}. Output ONLY the task string.",
+      "distiller": "You are a Semantic Distiller. Output ONLY the intent string.",
+      "language_instruction": "\n(Please reply in English)"
+    }
+  }
+}

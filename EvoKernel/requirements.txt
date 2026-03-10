@@ -1,0 +1,9 @@
+numpy
+google-cloud-aiplatform
+openai
+colorama
+python-dotenv
+requests
+beautifulsoup4
+duckduckgo-search
+psutil
