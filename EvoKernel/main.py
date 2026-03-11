@@ -16,7 +16,7 @@ def main():
     model_display = " | ".join(active_models) if active_models else "全部离线 (Offline)"
     
     print(f"{Fore.MAGENTA}=========================================={Style.RESET_ALL}")
-    print(f"{Fore.MAGENTA}     Evo-Cognition Kernel (ECK)          {Style.RESET_ALL}")
+    print(f"{Fore.MAGENTA}     Evo-Cognition Kernel (ECK) V1.0         {Style.RESET_ALL}")
     print(f"{Fore.MAGENTA}   主控架构: Python 决策路由 + LLM 语义引擎 {Style.RESET_ALL}")
     print(f"{Fore.CYAN}   [当前生效] {model_display}{Style.RESET_ALL}")
     print(f"{Fore.MAGENTA}=========================================={Style.RESET_ALL}")
