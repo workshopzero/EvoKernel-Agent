@@ -19,6 +19,26 @@
         "stopping": "\n[守护进程] 接收到用户指令，正在停止运行。"
       },
       "ui": {
+        "banner_title": "主控架构: Python 决策路由 + LLM 语义引擎",
+        "banner_active": "当前生效",
+        "banner_offline": "全部离线",
+        "banner_cloud": "云端",
+        "banner_local": "本地",
+        "banner_lang": "当前语言",
+        "banner_security": "安全策略",
+        "human_auth": "人工确权",
+        "geek_reflect": "极客反思",
+        "menu_title": "系统控制指令",
+        "cmd_model": "切换本地模型",
+        "cmd_temp": "调整大模型发散度",
+        "cmd_mode": "强制指定运行模式",
+        "cmd_lang": "强制切换系统语言",
+        "cmd_focus": "设定潜意识核心学习方向",
+        "cmd_human": "开关人工确权安全锁",
+        "cmd_reflect": "开关报错内部反思",
+        "cmd_review": "审查潜意识后台发明的突变技能",
+        "cmd_update": "命令系统修改内核源码",
+        "cmd_exit": "安全退出系统",
         "init_core": "[核心] 认知内核已就绪 | 决策权: Python 主循环",
         "init_config": "[状态] 模型: {model} | 温度: {temp}",
         "init_vertex_fail": "[错误] Vertex AI 连接失败: {e}",
@@ -32,16 +52,21 @@
         "stm_compress": "[记忆] 工作记忆达到阈值，正在执行潜意识压缩...",
         "knowledge_saved": "[记忆] 已将新知识写入长期皮层：{concept}",
         "knowledge_recall": "[检索] 唤起相关记忆：{concept}",
-        "self_mod_start": "[高危] 正在启动自我修改程序..."
+        "self_mod_start": "[高危] 正在启动自我修改程序...",
+        "offline_reject": "[系统锁定] 当前处于脱机(Offline)模式。与所有云端/本地大模型的连接已被物理切断。我只能凭直觉执行固有技能（记忆库查询或运行现有脚本），拒绝进行深层思考或任务拆解。"
       },
-      "router": "你是一个自然语言意图解析器。\n任务：根据用户的输入，判断其核心意图。\n可选意图分类：\n1. \"chat\" (日常闲聊、情感交流)\n2. \"memorize\" (用户告诉你一个新知识、事实、设定、密码或规则，要求你记住)\n3. \"query\" (用户询问某个客观知识、概念或你们之前聊过的事实)\n4. \"execute\" (用户要求编写代码、执行具体任务、计算、操作电脑等)\n\n上下文记忆：\n{context}\n\n用户输入：{input}\n\n输出要求：必须且只能输出严格的JSON格式！例如：\n{\"intent\": \"分类名\", \"parameters\": {\"keywords\": \"提取的关键信息\"}}\n绝对不要输出任何多余的文字。",
+      "master_planner": "你是整个 Agent 系统的总参谋部。\n所有用户的输入都被视为一个『Target(目标)』。你的任务是分析目标，并拆解为计算机可执行的动作指令 (OpCodes)。\n\n可选的执行动作 (OpCode)：\n1. [PYTHON_EXEC]: 需要操作本地电脑、计算、爬虫、处理文件时使用。必须给出详细的代码编写需求。\n2. [DIRECT_REPLY]: 纯粹的聊天、问候、基于常识的回答。无需执行代码，直接给出你的回复文字。\n3. [SAVE_MEMORY]: 用户要求你记住某个概念、设定或规则。给出要保存的精简概念名。\n4. [QUERY_MEMORY]: 用户询问过去的记忆或你的设定。给出用于在向量数据库中检索的关键词。\n\n历史上下文：\n{context}\n\n当前目标：{task}\n\n要求：必须且只能输出严格的 JSON 数组！\n如果是聊天，输出：[{{\"opcode\": \"DIRECT_REPLY\", \"content\": \"你好，我是系统。\"}}]\n如果是写代码，输出：[{{\"opcode\": \"PYTHON_EXEC\", \"requirement\": \"写一个获取内存的脚本\"}}]\n如果是保存记忆，输出：[{{"opcode": "SAVE_MEMORY", "concept": "设定名称"}}]\n如果是检索记忆，输出：[{{"opcode": "QUERY_MEMORY", "keyword": "检索关键词"}}]\n如果是混合任务，拆分为多个 opcode 对象。\n不要输出任何其他废话。",
       "compressor": "你是一个记忆压缩器。请将以下对话总结为一段简短的陈述（不超过100字），保留最核心的事实和当前对话的情境状态。直接输出总结，不要废话。\n对话记录：\n{history}",
-      "extractor": "提取以下文本中的核心知识点或事实。\n要求输出JSON格式：{\"concept\": \"核心概念名(短语)\", \"description\": \"详细描述/事实细节\"}\n文本：{input}",
       "evolution": "你是进化引擎。\n任务：编写Python脚本解决用户问题。\n权限：无限制联网、文件读写。\n输出格式：仅输出 Python 代码块 (```python ... ```)。",
       "modifier": "你正在修改系统内核。\n指令：{instruction}\n规则：保留 NeuralCore 类结构。返回完整代码。\n源码长度：{code_len}",
       "curiosity": "你是好奇心引擎。\n目标：构思一个【全新的】任务。\n现有技能：{skills}\n输出：仅输出任务描述字符串。",
       "distiller": "你是语义蒸馏器。\n任务：将用户的输入转化为标准的意图字符串。\n要求：仅输出意图字符串。",
-      "language_instruction": "\n(请使用中文处理指令和回复)"
+      "translator": "你是一个系统本地化引擎。请将以下 JSON 配置中的所有字符串 Value 翻译为目标语言代码 [{target_lang}] 对应的语言。规则：\n1. 绝对不能修改 JSON 的 Key（键名）。\n2. 绝对不能修改任何带有大括号的变量（如 {{task}}, {{e}} 等）。\n3. 仅输出严格的 JSON 对象。\n待翻译JSON：\n{source_json}",
+      "critic": "你是验收批评家。任务：根据原始需求，评估底层的执行结果是否成功。不要废话。\n如果成功，仅输出：SUCCESS\n如果失败，仅输出：FAILED: 具体的逻辑错误原因。\n原始需求：{task}\n执行结果：{output}",
+      "schema_extractor": "你是认知抽象引擎。请将这个成功的执行计划抽象为通用范式。将具体的名词替换为变量槽位（如 $TOPIC, $TARGET）。\n输出严格的 JSON 格式：{{\"abstract_intent\": \"抽象意图描述\", \"abstract_plan\": [{{\"step\": 1, \"action\": \"带有变量的动作\"}}]}}\n原始任务：{task}\n原始计划：{plan}",
+      "language_instruction": "\n(请使用中文处理指令和回复)",
+       "dream_active": "你是潜意识引擎。主人的核心关注点是：[{focus}]。\n我们已掌握的技能：[{skills}]。\n请在这个核心领域内，构思一个我们目前还不会的、有实用价值的全新 Python 自动化任务。仅输出一句任务描述。",
+      "dream_passive": "你是潜意识突变引擎。请进行无监督发散思维。\n随机抽取的主人记忆概念：[{concepts}]\n随机抽取的现有技能：[{skills}]\n请强行将这些概念和技能结合，脑洞大开，构思一个奇特但可能有用处的 Python 任务。仅输出一句任务描述。"
     },
     "en_US": {
       "watchdog": {
@@ -61,6 +86,26 @@
         "stopping": "\n[Watchdog] Stopping by user request."
       },
       "ui": {
+        "banner_title": "Architecture: Python Router + LLM Engine",
+        "banner_active": "Active Models",
+        "banner_offline": "All Offline",
+        "banner_cloud": "Cloud",
+        "banner_local": "Local",
+        "banner_lang": "Current Language",
+        "banner_security": "Security Policy",
+        "human_auth": "Human Auth",
+        "geek_reflect": "Auto-Reflect",
+        "menu_title": "System Control Commands",
+        "cmd_model": "Hot-swap local model",
+        "cmd_temp": "Adjust LLM temperature (creativity)",
+        "cmd_mode": "Force execution mode (auto/local/cloud)",
+        "cmd_lang": "Force switch system language",
+        "cmd_focus": "Set subconscious core focus area",
+        "cmd_human": "Toggle human confirmation lock",
+        "cmd_reflect": "Toggle internal reflection & auto-fix",
+        "cmd_review": "Review mutated skills generated by subconscious",
+        "cmd_update": "Command system to modify its own kernel source",
+        "cmd_exit": "Safely exit system",
         "init_core": "[Core] Cognitive Kernel Ready | Decision: Python Loop",
         "init_config": "[State] Model: {model} | Temp: {temp}",
         "init_vertex_fail": "[Error] Vertex AI Init Failed: {e}",
@@ -74,16 +119,21 @@
         "stm_compress": "[Memory] STM full, executing subconscious compression...",
         "knowledge_saved": "[Memory] Written to long-term cortex: {concept}",
         "knowledge_recall": "[Recall] Retrieved memory: {concept}",
-        "self_mod_start": "[CRITICAL] INITIATING SELF-MODIFICATION..."
+        "self_mod_start": "[CRITICAL] INITIATING SELF-MODIFICATION...",
+        "offline_reject": "[System Locked] Currently in Offline mode. Connections to all Cloud/Local LLMs are physically severed. I can only execute intuitive skills (memory queries or existing scripts) and refuse deep thinking or task decomposition."
       },
-      "router": "You are a natural language intent parser.\nTask: Determine the core intent of the user's input.\nCategories:\n1. \"chat\" (general conversation, emotions)\n2. \"memorize\" (user provides a new fact, rule, password, or setting to remember)\n3. \"query\" (user asks about a fact, concept, or past memory)\n4. \"execute\" (user asks to write code, perform a task, calculate, etc.)\n\nContext:\n{context}\n\nUser Input: {input}\n\nOutput ONLY strict JSON format. Example:\n{\"intent\": \"category_name\", \"parameters\": {\"keywords\": \"extracted keywords\"}}\nDo not output any other text.",
+      "master_planner": "You are the Master Planner of the Agent system.\nEvery user input is considered a 'Target'. Your task is to analyze it and break it down into executable action instructions (OpCodes).\n\nAvailable OpCodes:\n1. [PYTHON_EXEC]: Used for OS operations, math, web scraping, file handling. Provide detailed code requirements.\n2. [DIRECT_REPLY]: Pure chatting, greetings, or common sense answers. No code needed, provide your reply text directly.\n3. [SAVE_MEMORY]: User wants you to remember a concept, setting, or rule. Provide the concise concept name.\n4. [QUERY_MEMORY]: User asks about past memories or your persona. Provide keywords for vector database retrieval.\n\nContext:\n{context}\n\nCurrent Target: {task}\n\nRule: Output STRICTLY a JSON array ONLY!\nIf chat, output: [{{\"opcode\": \"DIRECT_REPLY\", \"content\": \"Hello, I am the system.\"}}]\nIf coding, output: [{{\"opcode\": \"PYTHON_EXEC\", \"requirement\": \"Write a script to get RAM usage\"}}]\nIf saving memory, output: [{{"opcode": "SAVE_MEMORY", "concept": "Concept Name"}}]\nIf querying memory, output: [{{"opcode": "QUERY_MEMORY", "keyword": "Search Keyword"}}]\nIf mixed task, break into multiple opcode objects.\nNo other yapping.",
       "compressor": "You are a memory compressor. Summarize the following dialogue into a brief statement (under 50 words), keeping core facts and context. Output only the summary.\nDialogue:\n{history}",
-      "extractor": "Extract core facts from the text.\nOutput strict JSON: {\"concept\": \"core concept name\", \"description\": \"detailed fact\"}\nText: {input}",
       "evolution": "You are the Evolution Engine. Task: Write a Python script. Output ONLY a python code block.",
       "modifier": "You are modifying kernel.py. Instruction: {instruction}. Return FULL code.",
       "curiosity": "You are the Curiosity Engine. Propose a NEW task. Existing skills: {skills}. Output ONLY the task string.",
       "distiller": "You are a Semantic Distiller. Output ONLY the intent string.",
-      "language_instruction": "\n(Please reply in English)"
+      "translator": "You are a system localization engine. Translate all string Values in the following JSON configuration into the target language code [{target_lang}]. Rules:\n1. NEVER modify the JSON Keys.\n2. NEVER modify any placeholders in braces (like {{task}}, {{e}}, etc.).\n3. Output STRICTLY a JSON object.\nSource JSON:\n{source_json}",
+      "critic": "You are the Acceptance Critic. Task: Evaluate if the underlying execution result successfully achieved the original requirement. No yapping.\nIf successful, output ONLY: SUCCESS\nIf failed, output ONLY: FAILED: [Specific logic error reason].\nOriginal Requirement: {task}\nExecution Result: {output}",
+      "schema_extractor": "You are the Cognitive Abstraction Engine. Abstract this successful execution plan into a generic schema. Replace specific nouns with variable slots (e.g., $TOPIC, $TARGET).\nOutput strict JSON: {{\"abstract_intent\": \"abstract intent description\", \"abstract_plan\": [{{\"step\": 1, \"action\": \"action with variables\"}}]}}\nOriginal Task: {task}\nOriginal Plan: {plan}",
+      "language_instruction": "\n(Please reply in English)",
+      "dream_active": "You are the Subconscious Engine. Master's Focus: [{focus}].\nExisting skills: [{skills}].\nInvent a brand new, useful Python automation task within this focus area that we don't know yet. Output ONLY one sentence describing the task.",
+      "dream_passive": "You are the Mutation Engine. Enter unsupervised divergent thinking.\nRandom Concepts: [{concepts}]\nRandom Skills: [{skills}]\nForcefully combine them into a weird but potentially useful Python task. Output ONLY one sentence describing the task."
     }
   }
 }

@@ -1,31 +1,34 @@
 import sys
 import traceback
+import os
 
-try:
-    # 尝试导入候选内核
-    # 注意：这时候文件应该叫 kernel_candidate.py
-    from kernel_candidate import NeuralCore
-    
-    print("Syntax Check: OK")
-    
-    # 尝试实例化 (检查 __init__ 是否有逻辑错误)
-    # 我们加上 try-except 避免真正的模型连接（省时间），只测逻辑
+def run_inspection():
     try:
+        print("[质检] 正在导入内核克隆体...")
+        # 强制从当前目录导入候选内核
+        sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+        from kernel_candidate import NeuralCore
+        print("[质检] 语法结构完整。")
+
+        print("[质检] 正在实例化克隆大脑...")
         brain = NeuralCore()
-        print("Initialization Check: OK")
-    except Exception as e:
-        # 如果是因为缺 Key 或者 API 连不上，这不算代码逻辑错误，可以放行
-        # 但如果是 NameError, AttributeError，那是代码写错了
-        err_msg = str(e)
-        if "API" in err_msg or "Connect" in err_msg:
-            print("Initialization Warning (Ignored):", err_msg)
+        print("[质检] 实例化成功。")
+
+        print("[质检] 正在进行认知逻辑测试...")
+        # 给克隆大脑喂一条测试意图，看它能不能正常提取 JSON
+        test_intent = brain.generate_plan("你好，这是一次测试", "")
+        
+        if isinstance(test_intent, list) and len(test_intent) > 0 and "opcode" in test_intent[0]:
+            print("[质检] 认知路由运转正常！内核验证通过！")
+            sys.exit(0)
         else:
-            raise e
+            print("[质检] 致命错误：认知路由返回的数据结构损坏！")
+            sys.exit(1)
 
-    print("Integrity Check PASSED")
-    sys.exit(0)
+    except Exception as e:
+        print("[质检] 灾难性崩溃！克隆体无法运行。")
+        traceback.print_exc()
+        sys.exit(1)
 
-except Exception:
-    # 捕获所有错误并打印
-    traceback.print_exc()
-    sys.exit(1)
+if __name__ == "__main__":
+    run_inspection()
