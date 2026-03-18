@@ -110,7 +110,7 @@ def main():
             if user_input.startswith("/set_focus "):
                 focus = user_input.replace("/set_focus ", "").strip()
                 print(f"{Fore.GREEN}{brain.update_state('focus_area', focus)}{Style.RESET_ALL}")
-                print(f"{Fore.YELLOW}潜意识定向学习目标已锁定为: {}{Style.RESET_ALL}")
+                print(f"{Fore.YELLOW}潜意识定向学习目标已锁定为: {focus}{Style.RESET_ALL}")
                 continue
             
             if user_input.startswith("/set_temp "):
